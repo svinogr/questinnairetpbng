@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">ТПБНГП</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="all_question">
+      С комментариями
+    </string>
+    <string name="nav_serch_name">Поиск</string>
+    <string name="nav_nav_captain">Требования промышленной безопасности в нефтяной и газовой промышленности</string>
+    <string name="nav_senior_assistant">По разделам</string>
+    <string name="nav_watch_mate_assistant">Вахтенные помощники капитана</string>
+    <string name="mailto">Email</string>
+    <string name="number_search">№</string>
+    <string name="drawer_down_text">"Тест.</string>
+    <string name="drawer_up_text">Требования промышленной безопасности в нефтяной и газовой промышленности</string>
+    <string name="subject_mail">Требования промышленной безопасности в нефтяной и газовой промышленности</string>
+    <string name="email_mail">updevel@gmail.com</string>
+    <string name="data_base_path">/data/data/info.upump.questinnairetpbng/databases/</string>
+    <string name="mail_subject">Требования промышленной безопасности в нефтяной и газовой промышленности</string>
+    <string name="checkit">проверь себя</string>
+    <string name="label_good_answer">Правильно:</string>
+    <string name="label_bad_answer">Неправильно:</string>
+    <string name="label_question">Вопрос:</string>
+    <string name="label_answer">Выберите вариант:</string>
+    <string name="number_question">Вопрос номер: %1$d</string>
+    <string name="answer_text">- %1$s</string>
+    <string name="title_result">Ваш результат</string>
+    <string name="title_count_result">Правильных ответов: %1$s </string>
+    <string name="title_finish">Закончить</string>
+    <string name="title_restart">Повторить</string>
+    <string name="toast_right">Правильный ответ</string>
+    <string name="toast_false">Неправильный ответ</string>
+    <string name="title_cap_fr">ТПБНГП</string>
+    <string name="title_choose_questions">Тестирование</string>
+    <string name="title_interval_holder">Вопросы c %1$d по %2$d</string>
+    <string name="title_interval_card">Список вопросов:</string>
+    <string name="interval_title_text">Часть %1d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_part_fr">Разделы</string>
+    <string name="title_card_part_item">Раздел %1s</string>
+</resources>
