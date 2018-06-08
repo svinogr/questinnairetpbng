@@ -68,7 +68,7 @@ public class QuestionDAO extends DBDAO {
                             DataBaseHelper.TABLE_KEY_CATEGORY,
                             DataBaseHelper.TABLE_KEY_IMG,
                             DataBaseHelper.TABLE_KEY_COMMENT},
-                   null, null, null, null, null
+                    null, null, null, null, null
             );
             if (cursor.moveToFirst()) {
                 do {
@@ -97,8 +97,15 @@ public class QuestionDAO extends DBDAO {
         return questions;
     }
 
-    public int getCount() {
-        return (int) DatabaseUtils.queryNumEntries(database, DataBaseHelper.TABLE_QUESTION);
+    public int getCount(String category) {
+//        return (int) DatabaseUtils.queryNumEntries(database, DataBaseHelper.TABLE_QUESTION);
+         String databaseCompare;
+        if(category == null){
+            databaseCompare = "select count(*) from "+DataBaseHelper.TABLE_QUESTION;
+        }else databaseCompare = "select count(*) from "+DataBaseHelper.TABLE_QUESTION+" where " +DataBaseHelper.TABLE_KEY_CATEGORY +" = "+category;
+        int l = (int) DatabaseUtils.longForQuery(database, databaseCompare,null);
+        System.out.println(l);
+        return l;
     }
 
     public Cursor getCursorQuestion() {
@@ -147,7 +154,66 @@ public class QuestionDAO extends DBDAO {
     }
 
     public List<Question> getQuestionsInterval(Interval interval) {
-        System.out.println(interval);
+        Cursor cursor = null;
+        List<Question> questions = new ArrayList<>();
+        try {
+            if (interval.getCategory() == null) {
+                cursor = database.query(DataBaseHelper.TABLE_QUESTION,
+                        new String[]{
+                                DataBaseHelper.TABLE_KEY_ID,
+                                DataBaseHelper.TABLE_KEY_BODY,
+                                DataBaseHelper.TABLE_KEY_CATEGORY,
+                                DataBaseHelper.TABLE_KEY_IMG,
+                                DataBaseHelper.TABLE_KEY_COMMENT},
+                        "LIMIT ? offset ? ", new String[]{
+                                String.valueOf(interval.getFinish() - interval.getStart()),
+                                String.valueOf(interval.getStart() - 1)},
+                        null, null, null, null
+                );
+            } else {
+
+                cursor = database.query(DataBaseHelper.TABLE_QUESTION,
+                        new String[]{
+                                DataBaseHelper.TABLE_KEY_ID,
+                                DataBaseHelper.TABLE_KEY_BODY,
+                                DataBaseHelper.TABLE_KEY_CATEGORY,
+                                DataBaseHelper.TABLE_KEY_IMG,
+                                DataBaseHelper.TABLE_KEY_COMMENT},
+                        DataBaseHelper.TABLE_KEY_CATEGORY + " LIKE ? LIMIT ? offset ? ", new String[]{String.valueOf("%" + interval.getCategory().toLowerCase() + "%"),
+                                String.valueOf(interval.getFinish() - interval.getStart()),
+                                String.valueOf(interval.getStart() - 1)},
+                        null, null, null, null
+                );
+            }
+            if (cursor.moveToFirst()) {
+                do {
+                    Question question = new Question();
+                    question.setId(cursor.getInt(0));
+                    question.setBody(stringToUpperCase(cursor.getString(1)));
+                    question.setCategory(stringToUpperCase(cursor.getString(2)));
+                    question.setImg(cursor.getString(3));
+                    question.setComment(stringToUpperCase(cursor.getString(4)));
+                    questions.add(question);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        AnswerDAO answerDAO = new AnswerDAO(context);
+        for (Question q : questions) {
+            List<Answer> answers = answerDAO.getAnswerByParentId(q.getId());
+            q.getAnswers().addAll(answers);
+        }
+
+        return questions;
+
+    }
+
+    public List<Question> getQuestionsByPartId(int partId) {
         Cursor cursor = null;
         List<Question> questions = new ArrayList<>();
         try {
@@ -158,9 +224,9 @@ public class QuestionDAO extends DBDAO {
                             DataBaseHelper.TABLE_KEY_CATEGORY,
                             DataBaseHelper.TABLE_KEY_IMG,
                             DataBaseHelper.TABLE_KEY_COMMENT},
-                    DataBaseHelper.TABLE_KEY_CATEGORY + " LIKE ? LIMIT ? offset ? ", new String[]{String.valueOf("%" + interval.getCategory().toLowerCase() + "%"),
-                            String.valueOf(interval.getFinish() - interval.getStart()),
-                            String.valueOf(interval.getStart()-1)},
+                    DataBaseHelper.TABLE_KEY_CATEGORY + " = ? ", new String[]{String.valueOf(partId)},
+
+
                     null, null, null, null
             );
             if (cursor.moveToFirst()) {
@@ -188,6 +254,5 @@ public class QuestionDAO extends DBDAO {
         }
 
         return questions;
-
     }
 }

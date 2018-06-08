@@ -17,14 +17,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.upump.questinnairetpbng.adapter.PartAdapter;
-import info.upump.questinnairetpbng.db.PartLoader;
+import info.upump.questinnairetpbng.adapter.AllPartAdapter;
+import info.upump.questinnairetpbng.db.AllPartLoader;
 import info.upump.questinnairetpbng.entity.Part;
 
 public class PartFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Part>> {
     private RecyclerView recyclerView;
     private List<Part> parts = new ArrayList<>();
-    private PartAdapter partAdapter;
+    private AllPartAdapter partAdapter;
 
     public PartFragment() {
         // Required empty public constructor
@@ -40,7 +40,7 @@ public class PartFragment extends Fragment implements LoaderManager.LoaderCallba
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-        partAdapter = new PartAdapter(parts);
+        partAdapter = new AllPartAdapter(parts);
     }
 
     @Override
@@ -58,11 +58,12 @@ public class PartFragment extends Fragment implements LoaderManager.LoaderCallba
     @NonNull
     @Override
     public Loader<List<Part>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new PartLoader(getContext());
+        return new AllPartLoader(getContext());
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Part>> loader, List<Part> data) {
+        parts.clear();
         parts.addAll(data);
         partAdapter.notifyDataSetChanged();
     }

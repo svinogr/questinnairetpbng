@@ -13,10 +13,10 @@ import info.upump.questinnairetpbng.R;
 import info.upump.questinnairetpbng.entity.Part;
 import info.upump.questinnairetpbng.model.PartVH;
 
-public class PartAdapter extends RecyclerView.Adapter<PartVH> {
+public class AllPartAdapter extends RecyclerView.Adapter<PartVH> {
     private List<Part> parts = new ArrayList<>();
 
-    public PartAdapter(List<Part> parts) {
+    public AllPartAdapter(List<Part> parts) {
         this.parts = parts;
     }
 

@@ -61,9 +61,12 @@ public class CheckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
         interval = new Interval();
-        interval.setCategory(getIntent().getStringExtra(CATEGORY));
+        String category = getIntent().getStringExtra(CATEGORY);
+        if(category!= null){
+            interval.setCategory(category);
+        }
         interval.setStart(getIntent().getIntExtra(START, 1));
-        interval.setFinish(getIntent().getIntExtra(FINISH, 26));
+              interval.setFinish(getIntent().getIntExtra(FINISH, 26));
         setTitle(String.format(getString(R.string.title_interval_holder), interval.getStart(), interval.getFinish()));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -6,22 +6,19 @@ import android.support.v4.content.AsyncTaskLoader;
 import java.util.List;
 
 import info.upump.questinnairetpbng.entity.Part;
-import info.upump.questinnairetpbng.entity.Question;
 
-public class PartLoader  extends AsyncTaskLoader<List<Question>> {
+public class AllPartLoader extends AsyncTaskLoader<List<Part>> {
     private Context context;
-    private int partId;
 
-    public PartLoader(Context context, int partId) {
+    public AllPartLoader(Context context) {
         super(context);
-        this.partId = partId;
     }
 
     @Override
-    public List<Question> loadInBackground() {
-       QuestionDAO questionDAO = new QuestionDAO(context);
-       List<Question> questions = questionDAO.getQuestionsByPartId(partId);
-        return questions;
+    public List<Part> loadInBackground() {
+        PartDAO partDAO = new PartDAO(context);
+        List<Part> list = partDAO.getParts();
+        return list;
     }
 
     private String stringToUpperCase(String s) {
@@ -41,7 +38,7 @@ public class PartLoader  extends AsyncTaskLoader<List<Question>> {
     }
 
     @Override
-    public void deliverResult(List<Question> data) {
+    public void deliverResult(List<Part> data) {
         super.deliverResult(data);
     }
 

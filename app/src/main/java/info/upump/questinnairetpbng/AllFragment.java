@@ -29,14 +29,14 @@ import info.upump.questinnairetpbng.db.QuestionLoader;
 import info.upump.questinnairetpbng.entity.Question;
 
 
-public class CaptainFragment extends Fragment implements AdapterView.OnItemClickListener,
+public class AllFragment extends Fragment implements AdapterView.OnItemClickListener,
         LoaderManager.LoaderCallbacks<List<Question>> {
     private static List<Question> list = new ArrayList<>();
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private QuestionAdapter questionAdapter;
     private SearchView searchView;
-    LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager linearLayoutManager;
     private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -62,6 +62,8 @@ public class CaptainFragment extends Fragment implements AdapterView.OnItemClick
             }
         }
     };
+
+
 
     @Nullable
     @Override

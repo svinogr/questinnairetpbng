@@ -49,7 +49,7 @@ public class ChooseInterval extends AppCompatActivity {
 
     private void initIntervals() {
         QuestionDAO questionDAO = new QuestionDAO(this);
-        int count = questionDAO.getCount();
+        int count = questionDAO.getCount(category);
         int countCards = count / intervalCards;
         Interval interval;
         for (int i = 0; i <= countCards; i++) {
