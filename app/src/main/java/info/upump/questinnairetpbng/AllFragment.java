@@ -89,7 +89,7 @@ public class AllFragment extends Fragment implements AdapterView.OnItemClickList
         });
 
         progressBar = root.findViewById(R.id.progressSearchCategory);
-        progressBar.setVisibility(progressBar.VISIBLE);
+//        progressBar.setVisibility(progressBar.VISIBLE);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
 
@@ -105,7 +105,7 @@ public class AllFragment extends Fragment implements AdapterView.OnItemClickList
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = new Bundle();
-        getLoaderManager().initLoader(1, bundle, this);
+        getLoaderManager().initLoader(0, bundle, this);
     }
 
     @Override
@@ -116,6 +116,9 @@ public class AllFragment extends Fragment implements AdapterView.OnItemClickList
 
     @Override
     public Loader<List<Question>> onCreateLoader(int id, Bundle args) {
+        if(list.size()<1){
+            progressBar.setVisibility(View.VISIBLE);
+        }
         return new QuestionLoader(getContext());
     }
 

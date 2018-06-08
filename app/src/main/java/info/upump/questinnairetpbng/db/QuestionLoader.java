@@ -24,9 +24,6 @@ public class QuestionLoader extends AsyncTaskLoader<List<Question>> {
         return list;
     }
 
-    private String stringToUpperCase(String s) {
-        return s != null && s.length() != 0 ? s.substring(0, 1).toUpperCase() + s.substring(1) : null;
-    }
 
     @Override
     protected void onStartLoading() {

@@ -98,7 +98,6 @@ public class QuestionDAO extends DBDAO {
     }
 
     public int getCount(String category) {
-//        return (int) DatabaseUtils.queryNumEntries(database, DataBaseHelper.TABLE_QUESTION);
          String databaseCompare;
         if(category == null){
             databaseCompare = "select count(*) from "+DataBaseHelper.TABLE_QUESTION;
