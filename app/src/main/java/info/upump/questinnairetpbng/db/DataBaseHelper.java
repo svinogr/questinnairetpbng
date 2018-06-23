@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_PART = "PART";
     private static String DB_PATH;
     private Context context;
-    public static final String PASS = "7rRXRZvKOJpg";
+
 
     public static final String TABLE_KEY_ID = "_id";
     public static final String TABLE_KEY_BODY = "body";
